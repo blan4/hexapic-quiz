@@ -11,6 +11,7 @@
         <link rel="import" href="bower_components/paper-radio-group/paper-radio-group.html">
         <link rel="import" href="bower_components/core-ajax/core-ajax.html">
         <link rel="import" href="bower_components/paper-toast/paper-toast.html">
+        <link rel="import" href="bower_components/paper-progress/paper-progress.html">
         <link rel="stylesheet" shim-shadowdom href="app.css">
     </head>
 
@@ -18,9 +19,11 @@
     <paper-toast text="Answer is wrong. Try again!"></paper-toast>
     <core-header-panel navigation flex>
         <core-toolbar style="height: 250px">
-
+            <h1>Hexapic Quest</h1>
         </core-toolbar>
         <section vertical layout>
+            <p id="score">Score: </p>
+            <paper-progress value="0"></paper-progress>
             <paper-radio-group role="radiogroup">
                 <template id="answers" repeat="{{ variants }}">
                     <paper-radio-button name="{{}}" label="{{}}" role="radio"></paper-radio-button>
@@ -46,6 +49,10 @@
             var toast = document.querySelector('paper-toast');
             var answer = document.querySelector('paper-radio-group');
             var img = document.querySelector('#question');
+            var totalScore = 0;
+            var passedQuestions = 10;
+            var score = document.querySelector('#score');
+            var progress = document.querySelector('paper-progress');
             button.addEventListener('click', function(e){
                 if (answer.selected != null) {
                     ajax.params = {uid: button.model['uid'], answer: answer.selected};
@@ -69,14 +76,25 @@
                     if (data['isRight'] !== undefined) {
                         if (data['isRight'] == "true") {
                             toast.text = "Good job. Next picture!";
+                            totalScore += 10;
                             toast.show();
+                            if (passedQuestions <= 0) {
+                                console.log('WellDone');
+                            } else {
+                                passedQuestions -= 1;
+                            }
+                            progress.value = (10 - passedQuestions)*10;
                             ajax.params = '';
                         } else {
                             toast.text = "Answer "+data['answer']+" is wrong. Try again!.";
                             toast.show();
+                            if (totalScore != 0) {
+                                totalScore -= 5;
+                            }
                         }
                     }
                 }
+                score.innerHTML = "Score: "+totalScore;
             });
         });
     </script>
