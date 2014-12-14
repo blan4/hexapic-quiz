@@ -40,6 +40,7 @@
                 <div class="center">Ok</div>
                 <paper-ripple fit></paper-ripple>
             </div>
+            <a href="https://twitter.com/share" class="twitter-share-button" data-text="Random + Instagram + Quiz= Hexapic Quest via cat-in-the-dark" data-hashtags="hexapic devfest" data-url="bit.ly/hexapic_quiz" data-via="senior_sigan">Tweet</a>
             <core-ajax
                     auto
                     url="//hexapicserv.appspot.com/random"
@@ -50,6 +51,9 @@
     <div class="image_container">
         <core-image id="question" class="quiz_image" sizing="cover"></core-image>
     </div>
+    <script type="text/javascript">
+        window.twttr=(function(d,s,id){var t,js,fjs=d.getElementsByTagName(s)[0];if(d.getElementById(id)){return}js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);return window.twttr||(t={_e:[],ready:function(f){t._e.push(f)}})}(document,"script","twitter-wjs"));
+    </script>
     <script>
         document.addEventListener('polymer-ready', function(){
             var ajax = document.querySelector('core-ajax');
