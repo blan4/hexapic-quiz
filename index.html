@@ -4,10 +4,43 @@
         <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
         <script src="bower_components/webcomponentsjs/webcomponents.min.js"></script>
         <link rel="import" href="bower_components/polymer/polymer.html">
-        <link rel="import" href="bower_components/core-component-page/core-component-page.html">
+        <link rel="import" href="bower_components/core-scaffold/core-scaffold.html">
+        <link rel="import" href="bower_components/core-image/core-image.html">
+        <link rel="import" href="bower_components/paper-ripple/paper-ripple.html">
+        <link rel="import" href="bower_components/paper-radio-button/paper-radio-button.html">
+        <link rel="import" href="bower_components/paper-radio-group/paper-radio-group.html">
+        <link rel="stylesheet" shim-shadowdom href="app.css">
     </head>
 
     <body unresolved>
-        <core-component-page></core-component-page>
+    <core-scaffold>
+        <core-header-panel navigation flex mode="seamed">
+            <core-toolbar>HexapicQuest</core-toolbar>
+            <section>
+                <paper-radio-group role="radiogroup">
+                    <paper-radio-button name="cat" label="cat" role="radio"></paper-radio-button>
+                    <paper-radio-button name="dog" label="dog" role="radio"></paper-radio-button>
+                </paper-radio-group>
+                <div class="button raised green">
+                    <div class="center">Ok</div>
+                    <paper-ripple fit></paper-ripple>
+                </div>
+                <core-ajax
+                        auto
+                        url="http://hexapicserv.appspot.com/random"
+                        handleAs="json"
+                        on-core-response="console.log(123)"></core-ajax>
+            </section>
+        </core-header-panel>
+        <div tool>Title</div>
+        <div>
+            <!--<core-image src="http://hexapicserv.appspot.com/random?uid=JENNrfEbNvnkdrs"></core-image>-->
+        </div>
+    </core-scaffold>
+    <script>
+        document.addEventListener('polymer-ready', function(){
+            console.log("Bum");
+        });
+    </script>
     </body>
 </html>

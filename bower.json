@@ -15,6 +15,11 @@
   ],
   "dependencies": {
     "polymer": "Polymer/polymer#^0.5.1",
-    "core-ajax": "Polymer/core-ajax#^0.5.1"
+    "core-ajax": "Polymer/core-ajax#^0.5.1",
+    "core-scaffold": "Polymer/core-scaffold#~0.5.2",
+    "core-menu": "Polymer/core-menu#~0.5.2",
+    "core-image": "Polymer/core-image#~0.5.2",
+    "paper-ripple": "Polymer/paper-ripple#~0.5.2",
+    "paper-radio-group": "Polymer/paper-radio-group#~0.5.2"
   }
 }
