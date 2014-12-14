@@ -37,7 +37,7 @@
         </section>
     </core-header-panel>
     <div class="image_container">
-        <core-image class="quiz_image" sizing="cover" src="http://hexapicserv.appspot.com/random?uid=JENNrfEbNvnkdrs"></core-image>
+        <core-image id="question" class="quiz_image" sizing="cover"></core-image>
     </div>
     <script>
         document.addEventListener('polymer-ready', function(){
@@ -45,6 +45,7 @@
             var button = document.querySelector('#submit');
             var toast = document.querySelector('paper-toast');
             var answer = document.querySelector('paper-radio-group');
+            var img = document.querySelector('#question')
             button.addEventListener('click', function(e){
                 if (answer.selected != null) {
                     ajax.params = {uid: button.model['uid'], answer: answer.selected};
@@ -55,9 +56,12 @@
                 data = e.detail.response;
 
                 if (data['uid'] !== undefined) {
+                    img.src = "http://hexapicserv.appspot.com/random?uid=" + data['uid'];
+
                     button.model = {
                         uid: data['uid']
                     };
+
                     document.querySelector('#answers').model = {
                         variants: e.detail.response.variants
                     };
