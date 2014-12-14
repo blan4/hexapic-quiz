@@ -16,37 +16,36 @@
 
     <body unresolved>
     <paper-toast text="Answer is wrong. Try again!"></paper-toast>
-    <core-scaffold>
-        <core-header-panel navigation flex mode="seamed">
-            <core-toolbar>HexapicQuest</core-toolbar>
-            <section>
-                <paper-radio-group role="radiogroup">
-                    <template id="answers" repeat="{{ variants }}">
-                        <paper-radio-button name="{{}}" label="{{}}" role="radio"></paper-radio-button>
-                    </template>
-                </paper-radio-group>
-                <div class="button raised green" id="submit">
-                    <div class="center">Ok</div>
-                    <paper-ripple fit></paper-ripple>
-                </div>
-                <core-ajax
-                        auto
-                        url="//hexapicserv.appspot.com/random"
-                        handleAs="json"></core-ajax>
-            </section>
-        </core-header-panel>
-        <div tool>Title</div>
-        <div>
-            <!--<core-image src="http://hexapicserv.appspot.com/random?uid=JENNrfEbNvnkdrs"></core-image>-->
-        </div>
-    </core-scaffold>
+    <core-header-panel navigation flex>
+        <core-toolbar style="height: 250px">
+
+        </core-toolbar>
+        <section vertical layout>
+            <paper-radio-group role="radiogroup">
+                <template id="answers" repeat="{{ variants }}">
+                    <paper-radio-button name="{{}}" label="{{}}" role="radio"></paper-radio-button>
+                </template>
+            </paper-radio-group>
+            <div class="button raised green" id="submit">
+                <div class="center">Ok</div>
+                <paper-ripple fit></paper-ripple>
+            </div>
+            <core-ajax
+                    auto
+                    url="//hexapicserv.appspot.com/random"
+                    handleAs="json"></core-ajax>
+        </section>
+    </core-header-panel>
+    <div class="image_container">
+        <core-image class="quiz_image" sizing="cover" src="http://hexapicserv.appspot.com/random?uid=JENNrfEbNvnkdrs"></core-image>
+    </div>
     <script>
         document.addEventListener('polymer-ready', function(){
             var ajax = document.querySelector('core-ajax');
             var button = document.querySelector('#submit');
             var toast = document.querySelector('paper-toast');
             var answer = document.querySelector('paper-radio-group');
-            button.addEventListener('tap', function(e){
+            button.addEventListener('click', function(e){
                 if (answer.selected != null) {
                     ajax.params = {uid: button.model['uid'], answer: answer.selected};
                 }

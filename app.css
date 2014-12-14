@@ -8,6 +8,18 @@ body {
     -webkit-touch-callout: none;
 }
 
+html, body {
+    height: 100%;
+    margin: 0;
+}
+core-header-panel {
+    height: 100%;
+}
+
+core-toolbar {
+    background-color: #70c26f;
+}
+
 paper-radio-button {
     display: block;
 }
@@ -73,6 +85,23 @@ section > * {
     display: inline-block;
     width: 56px;
     height: 56px;
+}
+
+.image_container {
+    position: absolute;
+    top: 75px;
+    left: 300px;
+    box-shadow: 0 2px 10px 0 rgba(0, 0, 0, 0.16);
+    width: 808px;
+    height: 808px;
+    border-radius: 3px;
+    background-color: #f9f9f9;
+}
+
+.quiz_image {
+    margin: 4px 4px 4px 4px;
+    width: 800px;
+    height: 800px;
 }
 
 .icon-button > core-icon {
