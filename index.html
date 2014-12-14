@@ -45,7 +45,7 @@
             var button = document.querySelector('#submit');
             var toast = document.querySelector('paper-toast');
             var answer = document.querySelector('paper-radio-group');
-            var img = document.querySelector('#question')
+            var img = document.querySelector('#question');
             button.addEventListener('click', function(e){
                 if (answer.selected != null) {
                     ajax.params = {uid: button.model['uid'], answer: answer.selected};
