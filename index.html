@@ -14,14 +14,14 @@
         <link rel="import" href="bower_components/paper-progress/paper-progress.html">
         <link rel="import" href="bower_components/paper-fab/paper-fab.html">
         <link rel="import" href="bower_components/paper-dialog/paper-dialog.html">
+        <link rel="import" href="bower_components/paper-button/paper-button.html">
         <link rel="stylesheet" shim-shadowdom href="app.css">
     </head>
 
     <body unresolved>
-    <paper-dialog id="endGame" backdrop role="dialog" autoclosedisabled heading="Win. Hexapic Quest!">
+    <paper-dialog id="endGame" backdrop role="dialog" autoclosedisabled heading="You win Hexapic Quest!">
         <p id="results"></p>
-        <p align="right">Based on hexapic (<a href="http://hexapicserv.appspot.com">http://hexapicserv.appspot.com</a>)</p>
-        <p align="right">By CAT_IN_THE_DARK</p>
+        <paper-button style="background: #4285f4;color: #ffffff;" id="restart" affirmative autofocus role="button" tabindex="0">Play Again</paper-button>
     </paper-dialog>
     <paper-dialog id="helpModal" backdrop role="dialog"  heading="Welcome to Hexapic Quest!">
         <p>You see 4 pictures. Guess which tag all this pictures have. Solve 10 quizzes to proove you are true Instagram Guru!</p>
@@ -72,6 +72,14 @@
             var progress = document.querySelector('paper-progress');
             var endGame = document.querySelector('#endGame');
             var results = document.querySelector('#results');
+            var restartButton = document.querySelector("#restart")
+            restartButton.addEventListener('click', function(e){
+                totalScore = 0;
+                passedQuestions = 10;
+                progress.value = 0;
+                endGame.toggle();
+                score.innerHTML = "Score: " + totalScore;
+            });
             button.addEventListener('click', function(e){
                 if (answer.selected != null) {
                     ajax.params = {uid: button.model['uid'], answer: answer.selected};
