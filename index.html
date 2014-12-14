@@ -12,10 +12,17 @@
         <link rel="import" href="bower_components/core-ajax/core-ajax.html">
         <link rel="import" href="bower_components/paper-toast/paper-toast.html">
         <link rel="import" href="bower_components/paper-progress/paper-progress.html">
+        <link rel="import" href="bower_components/paper-fab/paper-fab.html">
+        <link rel="import" href="bower_components/paper-dialog/paper-dialog.html">
         <link rel="stylesheet" shim-shadowdom href="app.css">
     </head>
 
     <body unresolved>
+    <paper-dialog backdrop role="dialog"  heading="Welcome to Hexapic Quest!">
+        <p>You see 4 pictures. Guess which tag all this pictures have. Solve 10 quizzes to proove you are true Instagram Guru!</p>
+        <p align="right">Based on hexapic (<a href="http://hexapicserv.appspot.com">http://hexapicserv.appspot.com</a>)</p>
+        <p align="right">By CAT_IN_THE_DARK</p>
+    </paper-dialog>
     <paper-toast text="Answer is wrong. Try again!"></paper-toast>
     <core-header-panel navigation flex>
         <core-toolbar style="height: 250px">
@@ -39,6 +46,7 @@
                     handleAs="json"></core-ajax>
         </section>
     </core-header-panel>
+    <paper-fab id="help_button" icon="help"></paper-fab>
     <div class="image_container">
         <core-image id="question" class="quiz_image" sizing="cover"></core-image>
     </div>
@@ -95,6 +103,12 @@
                     }
                 }
                 score.innerHTML = "Score: "+totalScore;
+            });
+            var help = document.querySelector('#help_button');
+            var dialog = document.querySelector('paper-dialog');
+            help.addEventListener('click', function(e) {
+                console.log('hello');
+                dialog.toggle();
             });
         });
     </script>

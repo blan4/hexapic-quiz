@@ -20,6 +20,12 @@ core-header-panel {
     height: 100%;
 }
 
+#help_button {
+    position: absolute;
+    top: 220px;
+    right: 150px;
+}
+
 core-toolbar {
     background-color: #70c26f;
 }
