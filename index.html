@@ -90,6 +90,7 @@
                 progress.value = 0;
                 endGame.toggle();
                 score.innerHTML = "Score: " + totalScore;
+                ajax.params = '';
             });
             button.addEventListener('click', function(e){
                 if (answer.selected != null) {
@@ -113,17 +114,18 @@
                 } else {
                     if (data['isRight'] !== undefined) {
                         if (data['isRight'] == "true") {
-                            toast.text = "Good job. Next picture!";
-                            totalScore += 10;
-                            toast.show();
                             passedQuestions -= 1;
+                            totalScore += 10;
+                            progress.value = (10 - passedQuestions)*10;
                             if (passedQuestions <= 0) {
-                                console.log('WellDone');
+                                toast.text = "Good job. You win!";
                                 results.innerHTML = "Your scored " + totalScore + " points. Well done. Twit it now!!!!";
                                 endGame.toggle();
+                            } else {
+                                toast.text = "Good job. Next picture!";
+                                ajax.params = '';
                             }
-                            progress.value = (10 - passedQuestions)*10;
-                            ajax.params = '';
+                            toast.show();
                         } else {
                             toast.text = "Answer "+data['answer']+" is wrong. Try again!.";
                             toast.show();
