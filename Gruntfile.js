@@ -17,6 +17,7 @@ module.exports = function (grunt) {
   // load all grunt tasks
   require('load-grunt-tasks')(grunt);
   grunt.loadNpmTasks('web-component-tester');
+  grunt.loadNpmTasks('grunt-gh-pages');
 
   // configurable paths
   var yeomanConfig = {
@@ -284,6 +285,12 @@ module.exports = function (grunt) {
           threshold: 80
         }
       }
+    },
+    'gh-pages': {
+      options: {
+        base: 'dist'
+      },
+      src: ['**']
     }
   });
 
@@ -313,6 +320,7 @@ module.exports = function (grunt) {
   grunt.registerTask('test:remote', ['wct-test:remote']);
 
   grunt.registerTask('build', [
+    'jshint',
     'clean:dist',
     'sass',
     'copy',
@@ -326,8 +334,13 @@ module.exports = function (grunt) {
     'minifyHtml'
   ]);
 
+  grunt.registerTask('deploy', [
+    // 'test',
+    'build',
+    'gh-pages'
+  ]);
+
   grunt.registerTask('default', [
-    'jshint',
     // 'test'
     'build'
   ]);
