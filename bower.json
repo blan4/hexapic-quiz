@@ -1,21 +1,20 @@
 {
-  "name": "x-hexapic",
-  "version": "0.0.0",
+  "name": "hexapic-quiz",
+  "version": "0.0.1",
   "authors": [
-    "Ilya Siganov <ilya.blan4@gmail.com>"
+    "Ilya Siganov <ilya.blan4@gmail.com>",
+    "Kirill Leyfer <kolbasisha@gmail.com>"
   ],
-  "main": "src/x-hexapic.html",
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
-    "app/bower_components",
     "test",
     "tests"
   ],
   "dependencies": {
-    "polymer": "Polymer/polymer#^0.5.1",
-    "core-ajax": "Polymer/core-ajax#^0.5.1",
+    "polymer": "Polymer/polymer#^0.5.2",
+    "core-ajax": "Polymer/core-ajax#^0.5.2",
     "core-scaffold": "Polymer/core-scaffold#~0.5.2",
     "core-menu": "Polymer/core-menu#~0.5.2",
     "core-image": "Polymer/core-image#~0.5.2",
