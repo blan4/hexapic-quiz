@@ -2,6 +2,8 @@
   "name": "hexapic-quiz",
   "version": "0.0.1",
   "author": "Ilya Siganov <ilya.blan4@gmail.com>",
+  "description": "Guess as much instagram tags as you can.",
+  "repository": "https://github.com/cat-in-the-dark-wood/hexapic-quiz",
   "devDependencies": {
     "connect-livereload": "^0.4.0",
     "grunt": "^0.4.1",
