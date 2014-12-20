@@ -1,0 +1,58 @@
+<link rel="import" href="../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../bower_components/core-scaffold/core-scaffold.html">
+<link rel="import" href="../../bower_components/core-image/core-image.html">
+<link rel="import" href="../../bower_components/paper-ripple/paper-ripple.html">
+<link rel="import" href="../../bower_components/paper-radio-button/paper-radio-button.html">
+<link rel="import" href="../../bower_components/paper-radio-group/paper-radio-group.html">
+<link rel="import" href="../../bower_components/core-ajax/core-ajax.html">
+<link rel="import" href="../../bower_components/paper-toast/paper-toast.html">
+<link rel="import" href="../../bower_components/paper-progress/paper-progress.html">
+<link rel="import" href="../../bower_components/paper-fab/paper-fab.html">
+<link rel="import" href="../../bower_components/paper-dialog/paper-dialog.html">
+<link rel="import" href="../../bower_components/paper-button/paper-button.html">
+
+
+<polymer-element name="hexapic-app" attributes="user">
+  <template>
+    <link rel="stylesheet" href="hexapic-app.css">
+
+    <paper-dialog id="endGame" backdrop role="dialog" autoclosedisabled heading="You win Hexapic Quest!">
+      <p id="results"></p>
+      <paper-button style="background: #4285f4;color: #ffffff;" id="restart" affirmative autofocus role="button" tabindex="0">Play Again</paper-button>
+    </paper-dialog>
+    <paper-dialog id="helpModal" backdrop role="dialog"  heading="Welcome to Hexapic Quest!">
+      <p>You see 4 pictures. Guess which tag all this pictures have. Solve 10 quizzes to prove you are true Instagram Guru!</p>
+      <p align="right">Based on hexapic (<a href="http://hexapicserv.appspot.com">http://hexapicserv.appspot.com</a>)</p>
+      <p align="right">By CAT_IN_THE_DARK</p>
+    </paper-dialog>
+    <paper-toast text="Answer is wrong. Try again!"></paper-toast>
+    <core-header-panel navigation flex>
+      <core-toolbar style="height: 250px">
+        <h1>Hexapic Quiz</h1>
+      </core-toolbar>
+      <section vertical layout>
+        <p id="score">Score: 0</p>
+        <paper-progress value="0"></paper-progress>
+        <paper-radio-group role="radiogroup">
+          <template id="answers" repeat="{{ variants }}">
+            <paper-radio-button name="{{}}" label="{{}}" role="radio"></paper-radio-button>
+          </template>
+        </paper-radio-group>
+        <div class="button raised green" id="submit">
+          <div class="center">Ok</div>
+          <paper-ripple fit></paper-ripple>
+        </div>
+        <a href="https://twitter.com/share" class="twitter-share-button" data-text="Random + Instagram + Quiz= Hexapic Quest via cat-in-the-dark" data-hashtags="hexapic,devfest" data-url="http://bit.ly/hexapic_quiz" data-via="senior_sigan">Tweet</a>
+        <core-ajax
+          auto
+          url="//hexapicserv.appspot.com/random"
+          handleAs="json"></core-ajax>
+      </section>
+    </core-header-panel>
+    <paper-fab id="help_button" icon="help"></paper-fab>
+    <div class="image_container">
+      <core-image id="question" class="quiz_image" sizing="cover"></core-image>
+    </div>
+  </template>
+  <script src="hexapic-app.js"></script>
+</polymer-element>

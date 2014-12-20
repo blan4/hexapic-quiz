@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, minimum-scale=1.0, initial-scale=1.0, user-scalable=yes">
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="application-name" content="Hexapic Quiz">
   <meta name="description" content="You see 4 pictures. Guess which tag all this pictures have. Solve 10 quizzes to prove you are true Instagram Guru!">
   <meta name="title" content="Hexapic Quiz">
   <meta name="robots" content="all">
@@ -15,6 +16,17 @@
   <meta property="og:locale" content="en_EN" />
 
   <title>Hexapic Quiz</title>
+
+  <!--
+  Chrome 35 has old :host behavior before :host-context addition.
+  Since Chrome 35 does not have HTMLImports, we can use this as a decent signal
+  to force the ShadowDOM Polyfill.
+  -->
+  <script type="application/javascript">
+    if (!('import' in document.createElement('link'))) {
+      var Platform = {flags: {shadow: true}};
+    }
+  </script>
 
   <!-- build:js bower_components/webcomponentsjs/webcomponents.min.js -->
   <script src="bower_components/webcomponentsjs/webcomponents.js"></script>
@@ -29,44 +41,8 @@
   <!-- endbuild -->
 </head>
 
-<body unresolved>
-  <paper-dialog id="endGame" backdrop role="dialog" autoclosedisabled heading="You win Hexapic Quest!">
-    <p id="results"></p>
-    <paper-button style="background: #4285f4;color: #ffffff;" id="restart" affirmative autofocus role="button" tabindex="0">Play Again</paper-button>
-  </paper-dialog>
-  <paper-dialog id="helpModal" backdrop role="dialog"  heading="Welcome to Hexapic Quest!">
-    <p>You see 4 pictures. Guess which tag all this pictures have. Solve 10 quizzes to prove you are true Instagram Guru!</p>
-    <p align="right">Based on hexapic (<a href="http://hexapicserv.appspot.com">http://hexapicserv.appspot.com</a>)</p>
-    <p align="right">By CAT_IN_THE_DARK</p>
-  </paper-dialog>
-  <paper-toast text="Answer is wrong. Try again!"></paper-toast>
-  <core-header-panel navigation flex>
-    <core-toolbar style="height: 250px">
-      <h1>Hexapic Quiz</h1>
-    </core-toolbar>
-    <section vertical layout>
-      <p id="score">Score: 0</p>
-      <paper-progress value="0"></paper-progress>
-      <paper-radio-group role="radiogroup">
-        <template id="answers" repeat="{{ variants }}">
-          <paper-radio-button name="{{}}" label="{{}}" role="radio"></paper-radio-button>
-        </template>
-      </paper-radio-group>
-      <div class="button raised green" id="submit">
-        <div class="center">Ok</div>
-        <paper-ripple fit></paper-ripple>
-      </div>
-      <a href="https://twitter.com/share" class="twitter-share-button" data-text="Random + Instagram + Quiz= Hexapic Quest via cat-in-the-dark" data-hashtags="hexapic,devfest" data-url="http://bit.ly/hexapic_quiz" data-via="senior_sigan">Tweet</a>
-      <core-ajax
-        auto
-        url="//hexapicserv.appspot.com/random"
-        handleAs="json"></core-ajax>
-    </section>
-  </core-header-panel>
-  <paper-fab id="help_button" icon="help"></paper-fab>
-  <div class="image_container">
-    <core-image id="question" class="quiz_image" sizing="cover"></core-image>
-  </div>
+<body>
+  <hexapic-app fit touch-action="auto"></hexapic-app>
   <!-- build:js scripts/app.js -->
   <script src="scripts/app.js"></script>
   <!-- endbuild -->
