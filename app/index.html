@@ -52,7 +52,9 @@
 </head>
 
 <body>
-  <hexapic-app fit touch-action="auto"></hexapic-app>
+  <template is="auto-binding">
+    <hexapic-app fit touch-action="auto" user="{{user}}" connected="{{connected}}"></hexapic-app>
+  </template>
   <!-- build:js scripts/app.js -->
   <script src="scripts/app.js"></script>
   <!-- endbuild -->

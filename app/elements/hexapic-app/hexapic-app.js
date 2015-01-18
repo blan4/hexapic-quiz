@@ -1,78 +1,62 @@
-(function(document) {
+(function() {
   'use strict';
-  Polymer('hexapic-app', {
+  function setHexapicTransitionSpeed(ms) {
+    CoreStyle.g.transitions.duration = ms + 'ms';
+    CoreStyle.g.transitions.scaleDelay = CoreStyle.g.transitions.duration;
+  }
+  setHexapicTransitionSpeed(350);
+  new Polymer('hexapic-app', {
+    selected: 'splash',
+    minSplashTime: 1000,
+    connected: false,
+    responsiveWidth: '900px',
+    observe: {
+      'user': 'startup'
+    },
     ready: function() {
-      var ajax = document.querySelector('core-ajax');
-      var button = document.querySelector('#submit');
-      var toast = document.querySelector('paper-toast');
-      var answer = document.querySelector('paper-radio-group');
-      var img = document.querySelector('#question');
-      var totalScore = 0;
-      var passedQuestions = 10;
-      var score = document.querySelector('#score');
-      var progress = document.querySelector('paper-progress');
-      var endGame = document.querySelector('#endGame');
-      var results = document.querySelector('#results');
-      var restartButton = document.querySelector('#restart');
-      restartButton.addEventListener('click', function(){
-        totalScore = 0;
-        passedQuestions = 10;
-        progress.value = 0;
-        endGame.toggle();
-        score.innerHTML = 'Score: ' + totalScore;
-        ajax.params = '';
-      });
-      button.addEventListener('click', function(){
-        if (answer.selected !== null) {
-          ajax.params = {uid: button.model.uid, answer: answer.selected};
-        }
-      });
-      ajax.addEventListener('core-response', function(e){
-        console.log(e.detail.response);
-        var data = e.detail.response;
+      this.readyTime = Date.now();
+      if (!this.user) {
+        this.startup();
+      }
+    },
 
-        if (data.uid !== undefined) {
-          img.src = 'http://hexapicserv.appspot.com/random?uid=' + data.uid;
+    eventDelegates: {
+      'main': 'game'
+    },
 
-          button.model = {
-            uid: data.uid
-          };
+    showGame: function() {
+      console.log('Game');
+      this.selected = 'game';
+    },
 
-          document.querySelector('#answers').model = {
-            variants: e.detail.response.variants
-          };
-        } else {
-          if (data.isRight !== undefined) {
-            if (data.isRight === 'true') {
-              passedQuestions -= 1;
-              totalScore += 10;
-              progress.value = (10 - passedQuestions)*10;
-              if (passedQuestions <= 0) {
-                toast.text = 'Good job. You win!';
-                results.innerHTML = 'Your scored ' + totalScore + ' points. Well done. Twit it now!!!!';
-                endGame.toggle();
-              } else {
-                toast.text = 'Good job. Next picture!';
-                ajax.params = '';
-              }
-              toast.show();
-            } else {
-              toast.text = 'Answer ' + data.answer + ' is wrong. Try again!.';
-              toast.show();
-              if (totalScore !== 0) {
-                totalScore -= 5;
-              }
-            }
-          }
-        }
-        score.innerHTML = 'Score: ' + totalScore;
-      });
-      var help = document.querySelector('#help_button');
-      var dialog = document.querySelector('#helpModal');
-      help.addEventListener('click', function() {
-        dialog.toggle();
-      });
+    showProfile: function() {
+      this.selected = 'profile';
+      this.$.profile.userDefaults = this.user;
+    },
+
+    loadScores: function() {
+      //TODO: load from local storage
+      this.resetScores();
+    },
+    resetScores: function() {
+      if (this.user) {
+        this.user.score = 0;
+        this.user.playedGames = 0;
+      }
+    },
+    startup: function() {
+      var elapsed = Date.now() - this.readyTime;
+      var t = this.minSplashTime - elapsed;
+      this.async('completeStartup', null, t > 0 ? t : 0);
+    },
+    completeStartup: function() {
+      if (this.user) {
+        this.loadScores();
+        this.selected = 'game';
+      } else {
+        this.resetScores();
+        this.selected = 'profile';
+      }
     }
   });
-
-})(wrap(document));
+})();
