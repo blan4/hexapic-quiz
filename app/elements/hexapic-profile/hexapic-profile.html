@@ -123,8 +123,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         <div layout vertical flex cross-fade-delayed?="{{parentElement.lastSelected !== 'splash' && wide}}" on-keypress="{{ keypressAction }}">
           <div class="indent" layout vertical>
             <div class="header">{{userDefaults ? 'Your Profile' : 'Sign In'}}</div>
-            <paper-input label="First Name" id="first"></paper-input>
-            <paper-input label="Last Initial" id="last" maxlength="1"></paper-input>
+            <paper-input label="Nickname" id="name"></paper-input>
             <div class="header spaced">Choose an Avatar</div>
           </div>
           <div id="avatarList" flex>
@@ -142,7 +141,7 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
           <div horizontal center layout>
             <paper-button on-tap="{{handleLogout}}" hidden?="{{!user}}">Sign Out</paper-button>
             <div flex></div>
-            <paper-fab id="check" icon="check" showing?="{{$.first.value.length && $.last.value.length && selectedAvatar !== undefined}}" on-tap="{{handleLogin}}"></paper-fab>
+            <paper-fab id="check" icon="check" showing?="{{$.name.value.length && selectedAvatar !== undefined}}" on-tap="{{handleLogin}}"></paper-fab>
           </div>
         </div>
       </div>
@@ -158,12 +157,9 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
         var key = ev.keyIdentifier;
         if (key === 'Enter' || code === 13) {
           var target = ev.target;
-          if (target === this.$.first) {
+          if (target === this.$.name) {
             // TODO(dfreedm): calling the focus event handler in lieu of a real api
-            this.$.last.focusAction();
-          } else if (target === this.$.last) {
-            // after "last" field, lower keyboard to show avatar list
-            this.$.last.blur();
+            this.$.name.blur();
           }
         }
       },
@@ -178,20 +174,18 @@ subject to an additional IP rights grant found at http://polymer.github.io/PATEN
       userDefaultsChanged: function() {
         if (this.userDefaults) {
           var n = this.userDefaults.name;
-          this.$.first.value = n.substring(0, n.length-2);
-          this.$.last.value = n[n.length-1];
+          this.$.name.value = n.substring(0, n.length-2);
           this.selectedAvatar = this.userDefaults.avatar - 1;
           this.score = this.userDefaults.score;
         } else {
-          this.$.first.value = '';
-          this.$.last.value = '';
+          this.$.name.value = '';
           this.selectRandomAvatar();
           this.score = 0;
         }
       },
       handleLogin: function() {
         this.user = {
-          name: this.$.first.value + ' ' + this.$.last.value.substring(0,1),
+          name: this.$.name.value,
           avatar: this.selectedAvatar + 1,
           score: this.score || 0
         };
