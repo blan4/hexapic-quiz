@@ -1,3 +1,1 @@
-->
-  Polymer 'hexapic-game', {}
-  console.log 'nya'
+Polymer 'hexapic-game', {}
