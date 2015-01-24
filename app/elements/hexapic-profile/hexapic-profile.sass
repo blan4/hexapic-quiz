@@ -1,0 +1,92 @@
+core-toolbar
+  background-color: none
+
+.hero
+  background-color: white
+
+.card
+  background-color: white
+  padding: 20px 16px
+  box-sizing: border-box
+  -moz-box-sizing: border-box
+
+.wide.card
+  margin-top: 64px
+  max-height: 580px
+  max-width: 512px
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26)
+  border-radius: 2px
+
+.header
+  font-size: 1.5em
+  color: #00BCD4
+  font-weight: lighter
+
+.spaced
+  margin-top: 16px
+
+.indent
+  padding: 0 2px
+
+.topeka-avatar
+  width: 64px
+  height: 64px
+  border-radius: 50%
+  display: inline-block
+  overflow: hidden
+  -webkit-transform: translateZ(0)
+  transform: translateZ(0)
+
+.avatar-wrapper
+  display: inline-block
+  padding: 2px
+  margin: 6px 0
+
+.avatar-wrapper.core-selected
+  background-color: #00BCD4
+  border-radius: 50%
+
+.avatar-dummy
+  width: 68px
+  height: 0px
+
+#avatarList
+  margin: 16px 0 8px 0
+  overflow: auto
+  -webkit-overflow-scrolling: touch
+
+#check
+  width: 56px
+  height: 56px
+  background-color: #4CAF50
+  color: black
+
+paper-fab
+  transition: transform 500ms cubic-bezier(0.4, 0, 0.2, 1) 500ms, background-color 500ms cubic-bezier(0.4, 0, 0.2, 1)
+  -webkit-transition: -webkit-transform 500ms cubic-bezier(0.4, 0, 0.2, 1) 500ms, background-color 500ms cubic-bezier(0.4, 0, 0.2, 1)
+  -webkit-transform: scale(0)
+  transform: scale(0)
+  -webkit-transform-origin: 50% 50%
+  transform-origin: 50% 50%
+
+paper-fab[showing]
+  -webkit-transform: none
+  transform: none
+
+//TODO(kschaaf): fix more generally
+paper-fab[disabled]
+  pointer-events: none
+
+
+.main
+  position: relative
+
+.bg
+  background-color: #eee
+
+\:host([animate]:not(.core-selected)) .bg
+  z-index: -1
+
+paper-input
+  max-width: 20em
+  width: auto
